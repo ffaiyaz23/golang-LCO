@@ -13,6 +13,7 @@ func main() {
 
 	performGetRequest()
 	performPostRequest()
+	performPostFormRequest()
 }
 
 func performGetRequest() {
