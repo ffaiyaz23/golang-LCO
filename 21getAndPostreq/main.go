@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
 func main() {
 	fmt.Println("Welcome to Get request in Golang")
 
-	// performGetRequest()
+	performGetRequest()
 	performPostRequest()
 }
 
@@ -56,6 +57,23 @@ func performPostRequest() {
 
 	defer response.Body.Close()
 	content, _ := io.ReadAll(response.Body)
+
+	fmt.Println(string(content))
+}
+
+func performPostFormRequest() {
+	myUrl := "http://localhost:3000/postform"
+
+	//making formdata
+	data := url.Values{}
+	data.Add("firstname", "hitesh")
+	data.Add("lastname", "singh")
+	data.Add("firstname", "abc@gmail.com")
+
+	response, _ := http.PostForm(myUrl, data)
+	content, _ := io.ReadAll(response.Body)
+
+	defer response.Body.Close()
 
 	fmt.Println(string(content))
 }
