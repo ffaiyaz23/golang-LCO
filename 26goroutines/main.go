@@ -7,7 +7,10 @@ import (
 	"sync"
 )
 
-var waitGroup sync.WaitGroup // usually these are pointers
+var waitGroup sync.WaitGroup // these are pointers
+var mutex sync.Mutex         // pointer
+
+var signals = []string{"test"}
 
 func main() {
 	// go greeter("Hello")
@@ -27,6 +30,8 @@ func main() {
 	}
 
 	waitGroup.Wait()
+
+	fmt.Println(signals)
 }
 
 // func greeter(s string) {
@@ -43,6 +48,10 @@ func getStatusCode(endpoint string) {
 	}
 
 	fmt.Printf("%d status code for %s\n", result.StatusCode, endpoint)
+
+	mutex.Lock()
+	signals = append(signals, endpoint)
+	mutex.Unlock()
 
 	defer waitGroup.Done()
 }
