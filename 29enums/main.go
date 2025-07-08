@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-type orderStaus int
+// type orderStaus int
 type orderStausInString string
 
 // const (
